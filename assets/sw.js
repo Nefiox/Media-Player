@@ -26,7 +26,7 @@ async function precache() {
     // "/assets/index.js",
     // "/assets/MediaPlayer.js",
     // "/assets/plugins/AutoPlay.js",
-    // "/assets/plugins/AutoPause.js",
+    // "/assets/plugins/AutoPause.ts",
     // "/assets/index.css",
     // "/assets/Prologue.mp4",
   ]);
