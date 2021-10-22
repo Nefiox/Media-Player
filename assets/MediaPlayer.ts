@@ -1,39 +1,38 @@
+import { timingSafeEqual } from "crypto";
+
 class MediaPlayer {
+  media: HTMLMediaElement;
+  plugins: Array<any>;
+  container: HTMLElement;
+
   constructor(config) {
     this.media = config.el;
     this.plugins = config.plugins || [];
-
-    this._initPlugins();
+    this.initPlayer();
+    this.initPlugins();
   }
-  _initPlugins() {
-    const player = {
-      play: () => this.play(),
-      pause: () => this.pause(),
-      media: this.media,
-      get muted() {
-        return this.media.muted;
-      },
 
-      set muted(value) {
-        this.media.muted = value;
-        // if(value === true) {
-        //   this.media.muted = true;
-        // } else {
-        //   this.media.muted = false;
-        // }
-      }
-    };
+  initPlayer() {
+    this.container = document.createElement("div");
+    this.container.style.position = "relative";
+    this.media.parentNode.insertBefore(this.container, this.media);
+    this.container.appendChild(this.media);
+  }
 
+  private initPlugins() {
     this.plugins.forEach((plugin) => {
-      plugin.run(player);
+      plugin.run(this);
     });
   }
+
   play() {
     this.media.play();
   }
+
   pause() {
     this.media.pause();
   }
+
   togglePlay() {
     if (this.media.paused) {
       this.play();
@@ -41,12 +40,15 @@ class MediaPlayer {
       this.pause();
     }
   }
+
   mute() {
     this.media.muted = true;
   }
+
   unmute() {
     this.media.muted = false;
   }
+
   toggleMute() {
     if (this.media.muted) {
       this.unmute();
@@ -55,12 +57,5 @@ class MediaPlayer {
     }
   }
 }
-
-
-
-
-
-
-
 
 export default MediaPlayer;
