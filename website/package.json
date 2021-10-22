@@ -15,5 +15,8 @@
   },
   "browserlist": [
     "last 1 Chrome version"
-  ]
+  ],
+  "dependencies": {
+    "@nefiox/mediaplayer": "^1.0.0"
+  }
 }
